@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<local:FreshBaseContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Nearest_Pharmacy.Pages.BasketPage"
+             xmlns:local="clr-namespace:FreshMvvm;assembly = Nearest_Pharmacy"
+             x:Name="_this">
+    <local:FreshBaseContentPage.Content>
+      <StackLayout>
+        <ListView ItemsSource="{Binding basket}" IsRefreshing ="{Binding BindingContext.Refresh, Source={x:Reference _this}}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <ViewCell.View>
+                            <Label Text="{Binding Name}"/>
+                        </ViewCell.View>
+                      <ViewCell.ContextActions>
+                        <MenuItem Command="{Binding BindingContext.DeleteCommand, Source={x:Reference _this}}"
+                         CommandParameter="{Binding .}"
+                           Text="Удалить"/>
+                      </ViewCell.ContextActions>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Button Text="Заказать" VerticalOptions="End" Command="{Binding BindingContext.OrderCommand, Source={x:Reference _this}}"
+                           CommandParameter="{Binding .}"/>
+      </StackLayout>
+    </local:FreshBaseContentPage.Content>
+</local:FreshBaseContentPage>
